@@ -1,49 +1,37 @@
 import { observer } from "mobx-react-lite"
 import React, { FC } from "react"
-import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import { Button, Text } from "../../components"
-import { AppStackScreenProps } from "../../navigators" 
+import { ImageBackground, ImageStyle, View, ViewStyle } from "react-native"
+import { Button } from "../../components"
+import { AuthStackScreenProps } from "../../navigators"
 import { colors, spacing } from "../../theme"
 import { useSafeAreaInsetsStyle } from "../../utils/useSafeAreaInsetsStyle"
 
-const welcomeLogo = require("../../../assets/images/logo.png")
+const bgImage = require("../../../assets/images/get-started.png")
 
-interface WelcomeScreenProps extends AppStackScreenProps<"Welcome"> {} 
+interface WelcomeScreenProps extends AuthStackScreenProps<"Welcome"> {}
 
-export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeScreen(
-  _props, 
-) {
-  const { navigation } = _props
-
+export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeScreen({
+  navigation,
+}) {
   function goNext() {
-    navigation.navigate("Onboarding", { screen: "EnterPhone" })
+    navigation.navigate("PreLogin")
   }
 
   const $bottomContainerInsets = useSafeAreaInsetsStyle(["bottom"])
 
   return (
     <View style={$container}>
-      <View style={$topContainer}>
-        <Image style={$welcomeLogo} source={welcomeLogo} resizeMode="contain" />
-        <Text
-          testID="welcome-heading"
-          style={$welcomeHeading}
-          tx="common.title"
-          preset="heading"
-        />
-        <Text style={$welcomeSubHeading} tx="welcomeScreen.slogan" preset="subheading" />
-      </View>
-
-      <View style={[$bottomContainer, $bottomContainerInsets]}>
-        <Button
-          testID="next-screen-button"
-          preset="reversed"
-          tx="common.continue"
-          onPress={goNext}
-          style={{ backgroundColor: colors.palette.primary600 }}
-        />
-        <Text style={$bottomText} text="v 1.0" preset="subheading" />
-      </View>
+      <ImageBackground source={bgImage} resizeMode="cover" style={$image}>
+        <View style={[$bottomContainer, $bottomContainerInsets]}>
+          <Button
+            testID="next-screen-button"
+            preset="reversed"
+            tx="welcomeScreen.button"
+            onPress={goNext}
+            style={$btn}
+          />
+        </View>
+      </ImageBackground>
     </View>
   )
 })
@@ -53,39 +41,22 @@ const $container: ViewStyle = {
   backgroundColor: colors.background,
 }
 
-const $topContainer: ViewStyle = {
-  flexShrink: 1,
-  flexGrow: 1,
-  flexBasis: "57%",
-  justifyContent: "center",
-  paddingHorizontal: spacing.large,
-}
-
 const $bottomContainer: ViewStyle = {
   flexShrink: 1,
   flexGrow: 0,
-  flexBasis: "43%",
+  flexBasis: "65%",
   paddingHorizontal: spacing.large,
   justifyContent: "space-around",
 }
 
-const $welcomeLogo: ImageStyle = {
-  height: 88,
-  width: "100%",
-  marginBottom: spacing.huge,
+const $btn: ViewStyle = {
+  backgroundColor: colors.palette.primary600,
+  top: '50%',
+  width: '50%',
+  height: 40,
 }
 
-const $welcomeHeading: TextStyle = {
-  marginBottom: spacing.medium,
-  textAlign: "center",
-}
-
-const $welcomeSubHeading: TextStyle = {
-  marginBottom: spacing.large,
-  textAlign: "center",
-}
-
-const $bottomText: TextStyle = {
-  textAlign: "center",
-  color: colors.palette.neutral400,
+const $image: ImageStyle = {
+  flex: 1,
+  justifyContent: "flex-end",
 }

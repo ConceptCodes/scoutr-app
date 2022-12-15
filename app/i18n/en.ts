@@ -11,12 +11,22 @@ const en = {
   },
   welcomeScreen: {
     slogan: '2k park in real life',
-    button: 'Continue',
+    button: 'Get Started Now',
   },
-  enterPhoneScreen: {
-    title: "Phone Number.",
-    phoneFieldLabel: "Phone Number",
-    phoneFieldPlaceholder: "Enter your phone number",
+  preLoginScreen: {
+    button: 'Continue with Email',
+    connect: {
+      title: 'Connect',
+      description: 'with players with other players in your local area'
+    },
+    play: {
+      title: 'Play',
+      description: 'a variety of games outside. touch grass loser'
+    },
+    enjoy: {
+      title: 'Enjoy',
+      description: 'the outdoors and the company of others'
+    },
   },
   verifyOtpScreen: {
     title: "Verify OTP",
@@ -138,7 +148,6 @@ const en = {
         "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
     },
   },
-  // @demo remove-block-end
 }
 
 export default en

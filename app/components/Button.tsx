@@ -157,12 +157,78 @@ const $viewPresets = {
     },
   ] as StyleProp<ViewStyle>,
 
-  filled: [$baseViewStyle, { backgroundColor: colors.palette.neutral300 }] as StyleProp<ViewStyle>,
+  filled: [$baseViewStyle, { backgroundColor: colors.palette.primary600 }] as StyleProp<ViewStyle>,
 
   reversed: [
     $baseViewStyle,
     { backgroundColor: colors.palette.neutral800 },
   ] as StyleProp<ViewStyle>,
+
+  disabled: [
+    $baseViewStyle,
+    {
+      borderWidth: 1,
+      borderColor: colors.palette.neutral400,
+      backgroundColor: colors.palette.neutral100,
+    },
+  ] as StyleProp<ViewStyle>,
+
+  disabledFilled: [
+    $baseViewStyle,
+    { backgroundColor: colors.palette.primary600 },
+  ] as StyleProp<ViewStyle>,
+
+  disabledReversed: [
+    $baseViewStyle,
+    { backgroundColor: colors.palette.neutral800 },
+  ] as StyleProp<ViewStyle>,
+
+  rounded: [
+    $baseViewStyle,
+    {
+      borderWidth: 1,
+      borderColor: colors.palette.neutral400,
+      backgroundColor: colors.palette.neutral100,
+      borderRadius: 100,
+    },
+  ] as StyleProp<ViewStyle>,
+
+  roundedFilled: [
+    $baseViewStyle,
+    { backgroundColor: colors.palette.primary600, borderRadius: 100 },
+  ] as StyleProp<ViewStyle>,
+
+  roundedReversed: [
+    $baseViewStyle,
+    { backgroundColor: colors.palette.neutral800, borderRadius: 100 },
+  ] as StyleProp<ViewStyle>,
+
+  transparent: [
+    $baseViewStyle,
+    {
+      borderWidth: 1,
+      borderColor: colors.palette.neutral400,
+      backgroundColor: colors.palette.neutral100,
+    },
+  ] as StyleProp<ViewStyle>,
+
+  transparentFilled: [
+    $baseViewStyle,
+    { backgroundColor: colors.palette.primary600 },
+  ] as StyleProp<ViewStyle>,
+
+  outlineRounded: [
+    $baseViewStyle,
+    {
+      borderWidth: 1,
+      borderColor: colors.palette.primary600,
+      backgroundColor: colors.palette.transparent,
+      borderRadius: 100,
+    },
+  ] as StyleProp<ViewStyle>,
+
+
+
 }
 
 const $textPresets: Record<Presets, StyleProp<TextStyle>> = {
