@@ -7,7 +7,8 @@ const en = {
     title: 'Scoutr',
     nextBtn: 'Next',
     change: 'Change',
-    continue: 'Coutinue'
+    continue: 'Coutinue',
+    success: 'Success',
   },
   welcomeScreen: {
     slogan: '2k park in real life',
@@ -61,6 +62,7 @@ const en = {
     emailFieldPlaceholder: "Enter your email address",
     passwordFieldPlaceholder: "Super secret password here",
     button: "Continue",
+    error: "Invalid email or password.",
   },
   headers: {
     notification: "Notifications",

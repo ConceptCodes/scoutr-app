@@ -1,1 +1,1 @@
-export * from "./FeedScreen"
+export * from "./SearchScreen"
