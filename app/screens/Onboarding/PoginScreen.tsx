@@ -25,15 +25,31 @@ const content = [
 ]
 
 export const PreLoginScreen: FC<AuthStackScreenProps<"PreLogin">> = observer(
-  function PreLoginScreen() {
-    const [currentIndex, setCurrentIndex] = useState(0)
+  function PreLoginScreen({ navigation }) {
 
-    const Page = ({ index }: { index: number }) => {
+    const [index, setIndex] = useState(0)
+
+    const handleOnContinue = () => {
+      navigation.navigate("EnterEmail")
+    }
+
+    const handleOnGoogle = () => {
+      console.tron.log("onGoogle")
+    }
+
+    const handleOnApple = () => {
+      console.tron.log("onApple")
+    }
+
+    const Page = () => {
       return (
         <SlideShowCard
-          imageUri={content[currentIndex].image}
-          titleTx={content[currentIndex].title}
-          descriptionTx={content[currentIndex].description}
+          imageUri={content[index].image}
+          titleTx={content[index].title}
+          descriptionTx={content[index].description}
+          onContinue={handleOnContinue}
+          onGoogle={handleOnGoogle}
+          onApple={handleOnApple}
         />
       )
     }
@@ -42,9 +58,9 @@ export const PreLoginScreen: FC<AuthStackScreenProps<"PreLogin">> = observer(
       <Screen style={$root} safeAreaEdges={["bottom"]}>
         <InfinitePager
           minIndex={0}
-          maxIndex={content.length -1}
+          maxIndex={content.length - 1}
           renderPage={Page}
-          onPageChange={(e) => setCurrentIndex(e)}
+          onPageChange={(e) => setIndex(e)}
         />
       </Screen>
     )

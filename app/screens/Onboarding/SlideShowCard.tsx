@@ -43,10 +43,26 @@ export interface SlideShowCardProps {
    * Description
    */
   description?: TextProps["text"]
+
+  onContinue: () => void
+
+  onGoogle: () => void
+
+  onApple: () => void
 }
 
 export const SlideShowCard = observer(function SlideShowCard(props: SlideShowCardProps) {
-  const { style, imageUri, titleTx, title, descriptionTx, description } = props
+  const {
+    style,
+    imageUri,
+    titleTx,
+    title,
+    descriptionTx,
+    description,
+    onContinue,
+    onApple,
+    onGoogle,
+  } = props
   const $styles = [$container, style]
 
   const $bottomContainerInsets = useSafeAreaInsetsStyle(["bottom"])
@@ -66,12 +82,14 @@ export const SlideShowCard = observer(function SlideShowCard(props: SlideShowCar
             style={{ paddingHorizontal: spacing.large }}
             textStyle={$mainButtonTextStyle}
             preset="roundedFilled"
+            onPress={onContinue}
           />
           <View style={$oAuth}>
             <Button
               tx="preLoginScreen.button"
               textStyle={$mainButtonTextStyle}
               preset="outlineRounded"
+              onPress={onGoogle}
             >
               <Icon icon="google" color={colors.palette.primary600} />
             </Button>
@@ -79,6 +97,7 @@ export const SlideShowCard = observer(function SlideShowCard(props: SlideShowCar
               tx="preLoginScreen.button"
               textStyle={$mainButtonTextStyle}
               preset="outlineRounded"
+              onPress={onApple}
             >
               <Icon icon="apple" color={colors.palette.primary600} />
             </Button>

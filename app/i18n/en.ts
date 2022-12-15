@@ -28,6 +28,9 @@ const en = {
       description: 'the outdoors and the company of others'
     },
   },
+  enterEmailScreen: {
+    title: 'Whats you Email Address',
+  },
   verifyOtpScreen: {
     title: "Verify OTP",
     otpFieldLabel: "OTP",

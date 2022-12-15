@@ -1,23 +1,40 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
-import { StackScreenProps } from "@react-navigation/stack"
-import { AppStackScreenProps } from "../../navigators"
-import { Screen, Text } from "../../components"
+import { ViewStyle, View } from "react-native"
+import { AuthStackScreenProps } from "../../navigators"
+import { Screen, Text, TextField, Button } from "../../components"
+import { useHeader } from "../../utils/useHeader"
+import { colors } from "../../theme"
 
-
-// REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
-// @ts-ignore
-export const EnterEmailScreen: FC<StackScreenProps<AppStackScreenProps, "EnterEmail">> = observer(
+export const EnterEmailScreen: FC<AuthStackScreenProps<"EnterEmail">> = observer(
   function EnterEmailScreen() {
-    // Pull in one of our MST stores
-    // const { someStore, anotherStore } = useStores()
+    useHeader({
+      LeftActionComponent: (
+        <Text tx="enterEmailScreen.title" preset="heading" style={{ paddingHorizontal: 16 }} />
+      ),
+      style: {
+        height: 200,
+      },
+    })
 
-    // Pull in navigation via hook
-    // const navigation = useNavigation()
     return (
       <Screen style={$root} preset="scroll">
-        <Text text="enterEmail" />
+        <View style={{ top: 100 }}>
+          <TextField
+            placeholder="Email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            returnKeyType="done"
+            style={{ marginTop: 16 }}
+          />
+          <Button
+            tx="preLoginScreen.button"
+            style={{ marginTop: 16 }}
+            textStyle={{ color: colors.palette.white }}
+            preset="roundedFilled"
+          />
+        </View>
       </Screen>
     )
   },
@@ -25,4 +42,5 @@ export const EnterEmailScreen: FC<StackScreenProps<AppStackScreenProps, "EnterEm
 
 const $root: ViewStyle = {
   flex: 1,
+  padding: 20,
 }
