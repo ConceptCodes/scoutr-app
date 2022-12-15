@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import React, { FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, TextStyle, ViewStyle } from "react-native"
+import { TextInput, TextStyle, ViewStyle, View } from "react-native"
 import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../../components"
 import { useStores } from "../../models"
 import { AppStackScreenProps } from "../../navigators"
@@ -8,7 +8,7 @@ import { colors, spacing } from "../../theme"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
-export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
+export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen() {
   const authPasswordInput = useRef<TextInput>()
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -17,19 +17,19 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     authenticationStore: {
       authEmail,
       authPassword,
-      setAuthEmail,
       setAuthPassword,
       setAuthToken,
+      login: setLogin,
       validationErrors,
     },
   } = useStores()
 
-  useEffect(() => {
-    // Here is where you could fetch credientials from keychain or storage
-    // and pre-fill the form fields.
-    setAuthEmail("ignite@infinite.red")
-    setAuthPassword("ign1teIsAwes0m3")
-  }, [])
+  // useEffect(() => {
+  //   // Here is where you could fetch credientials from keychain or storage
+  //   // and pre-fill the form fields.
+  //   setAuthEmail("ignite@infinite.red")
+  //   setAuthPassword("ign1teIsAwes0m3")
+  // }, [])
 
   const errors: typeof validationErrors = isSubmitted ? validationErrors : ({} as any)
 
@@ -43,7 +43,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     // If successful, reset the fields and set the token.
     setIsSubmitted(false)
     setAuthPassword("")
-    setAuthEmail("")
+    setLogin()
 
     // We'll mock this with a fake token.
     setAuthToken(String(Date.now()))
@@ -55,7 +55,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         return (
           <Icon
             icon={isAuthPasswordHidden ? "view" : "hidden"}
-            color={colors.palette.neutral800}
+            color={isAuthPasswordHidden ? colors.palette.neutral800 : colors.palette.primary600}
             containerStyle={props.style}
             onPress={() => setIsAuthPasswordHidden(!isAuthPasswordHidden)}
           />
@@ -67,7 +67,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   useEffect(() => {
     return () => {
       setAuthPassword("")
-      setAuthEmail("")
     }
   }, [])
 
@@ -77,24 +76,21 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
     >
-      <Text testID="login-heading" tx="loginScreen.signIn" preset="heading" style={$signIn} />
-      <Text tx="loginScreen.enterDetails" preset="subheading" style={$enterDetails} />
-      {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
+      <Text testID="login-heading" tx="loginScreen.title" preset="heading" style={$signIn} />
 
-      <TextField
-        value={authEmail}
-        onChangeText={setAuthEmail}
-        containerStyle={$textField}
-        autoCapitalize="none"
-        autoComplete="email"
-        autoCorrect={false}
-        keyboardType="email-address"
-        labelTx="loginScreen.emailFieldLabel"
-        placeholderTx="loginScreen.emailFieldPlaceholder"
-        helper={errors?.authEmail}
-        status={errors?.authEmail ? "error" : undefined}
-        onSubmitEditing={() => authPasswordInput.current?.focus()}
-      />
+      <View style={{ flexDirection: "row", marginTop: 150 }}>
+        <Text size="sm" text="Current Email:" preset="subheading" />
+        <Text
+          size="sm"
+          text={authEmail}
+          style={{
+            color: colors.palette.primary600,
+            marginBottom: spacing.large,
+            paddingLeft: spacing.small,
+          }}
+          preset="subheading"
+        />
+      </View>
 
       <TextField
         ref={authPasswordInput}
@@ -115,9 +111,10 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
       <Button
         testID="login-button"
-        tx="loginScreen.tapToSignIn"
+        tx="loginScreen.button"
         style={$tapButton}
-        preset="reversed"
+        textStyle={{ color: colors.palette.white }}
+        preset="roundedFilled"
         onPress={login}
       />
     </Screen>
@@ -130,7 +127,7 @@ const $screenContentContainer: ViewStyle = {
 }
 
 const $signIn: TextStyle = {
-  marginBottom: spacing.small,
+  marginBottom: spacing.massive,
 }
 
 const $enterDetails: TextStyle = {

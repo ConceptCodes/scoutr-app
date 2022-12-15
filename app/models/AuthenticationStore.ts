@@ -1,12 +1,11 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
-import { api } from "../services/api"
 
 export const AuthenticationStoreModel = types
   .model("AuthenticationStore")
   .props({
     authToken: types.maybe(types.string),
-    authPhone: types.optional(types.string, ""),
-    otpCode: types.optional(types.string, ""),
+    authEmail: types.optional(types.string, ""),
+    authPassword: types.optional(types.string, ""),
   })
   .views((store) => ({
     get isAuthenticated() {
@@ -14,15 +13,18 @@ export const AuthenticationStoreModel = types
     },
     get validationErrors() {
       return {
-        authPhone: (function () {
-          if (store.authPhone.length === 0) return "can't be blank"
-          if (/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(store.authPhone))
-            return "must be a valid phone number"
+        authEmail: (function () {
+          if (store.authEmail.length === 0) return "can't be blank"
+          if (!store.authEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return "must be a valid email"
           return ""
         })(),
-        otpCode: (function () {
-          if (store.otpCode.length === 0) return "can't be blank"
-          if (store.otpCode.length !== 6) return "must be 6 digits"
+        authPassword: (function () {
+          if (store.authPassword.length === 0) return "can't be blank"
+          if (store.authPassword.length < 8) return "must be at least 8 characters"
+          if (!store.authPassword.match(/[a-z]/)) return "must contain at least one lowercase letter"
+          if (!store.authPassword.match(/[A-Z]/)) return "must contain at least one uppercase letter"
+          if (!store.authPassword.match(/[0-9]/)) return "must contain at least one number"
+          if (!store.authPassword.match(/[^a-zA-Z0-9]/)) return "must contain at least one special character"
           return ""
         })(),
       }
@@ -32,15 +34,19 @@ export const AuthenticationStoreModel = types
     setAuthToken(value?: string) {
       store.authToken = value
     },
-    async setAuthPhone(value: string) {
-      store.authPhone = value.replace(/ /g, "")
+    async setAuthEmail(value: string) {
+      store.authEmail = value.replace(/ /g, "")
     },
-    async setOtpCode(value: string) {
-      store.otpCode = value.replace(/ /g, "")
+    async setAuthPassword(value: string) {
+      store.authPassword = value.replace(/ /g, "")
     },
     logout() {
       store.authToken = undefined
-      store.authPhone = ""
+      store.authEmail = ""
+      store.authPassword = ""
+    },
+    login() {
+      store.authPassword = ""
     },
   }))
 

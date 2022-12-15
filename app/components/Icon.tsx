@@ -109,6 +109,8 @@ export const iconRegistry = {
   x: require("../../assets/icons/x.png"),
   google: require("../../assets/icons/google.png"),
   apple: require("../../assets/icons/apple.png"),
+  error: require("../../assets/icons/error.png"),
+  success: require("../../assets/icons/success.png"),
 }
 
 const $imageStyle: ImageStyle = {

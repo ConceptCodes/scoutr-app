@@ -33,8 +33,12 @@ const palette = {
   angry100: "#F2D6CD",
   angry500: "#C03403",
 
+  happy100: "#E0F2D6",
+  happy500: "#2E8B57",
+
   overlay20: "rgba(25, 16, 21, 0.2)",
   overlay50: "rgba(25, 16, 21, 0.5)",
+  overlay80: "rgba(25, 16, 21, 0.8)",
 
   white: "#FFFFFF",
   black: "#000000",
@@ -82,8 +86,11 @@ export const colors = {
    */
   error: palette.angry500,
   /**
+   * Success messages.
+   */
+  success: palette.happy500,
+  /**
    * Error Background.
-   *
    */
   errorBackground: palette.angry100,
 }
