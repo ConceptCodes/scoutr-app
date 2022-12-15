@@ -1,18 +1,16 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, TextStyle, View, Image } from "react-native"
-import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../navigators"
 import { Screen, Text } from "../components"
-import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 import { useHeader } from "../utils/useHeader"
 import { colors } from "../theme"
 
 
-export const NotificationScreen: FC<StackScreenProps<AppStackScreenProps, "Notification">> = observer(function NotificationScreen() {
-
-  const navigation = useNavigation()
+export const NotificationScreen: FC<AppStackScreenProps<"Notification">> = observer(function NotificationScreen(
+  { navigation },
+) {
 
   const emptyBgImage = require('../../assets/images/meditating.png')
 

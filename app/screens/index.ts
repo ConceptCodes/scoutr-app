@@ -1,7 +1,7 @@
 export * from "./ModalScreen"
 export * from "./Onboarding"
 export * from "./Root"
-export * from "./Profile"
+export * from "./Root/Profile"
 
 export * from "./DemoCommunityScreen"
 export * from "./DemoDebugScreen"

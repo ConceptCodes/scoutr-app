@@ -37,7 +37,12 @@ const en = {
     otpFieldLabel: "OTP",
   },
   notificationScreen: {
-    empty: "No recent notifications",
+    empty: "No Recent Notifications",
+  },
+  searchScreen: {
+    title: "Search",
+    topScoutrs: "Top Scoutrs",
+    filter: "Filter",
   },
   errorScreen: {
     title: "Something went wrong!",

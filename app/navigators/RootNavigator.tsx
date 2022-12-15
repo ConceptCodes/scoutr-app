@@ -7,9 +7,12 @@ import { Icon } from "../components"
 import { SearchScreen } from "../screens"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
+import { ProfileNavigator, ProfileNavigatorParamList } from "./ProfileNavigator"
 
 export type RootTabParamList = {
   Search: undefined
+  ProfileNav: ProfileNavigatorParamList
+  Notification: undefined
 }
 
 /**
@@ -35,46 +38,29 @@ export function RootNavigator() {
         tabBarStyle: [$tabBar, { height: bottom + 70 }],
         tabBarActiveTintColor: colors.text,
         tabBarInactiveTintColor: colors.text,
-        tabBarLabelStyle: $tabBarLabel,
         tabBarItemStyle: $tabBarItem,
+        tabBarShowLabel: false,
       }}
     >
       <Tab.Screen
         name="Search"
         component={SearchScreen}
         options={{
-          // tabBarLabel: translate("tabs.feed"),
-          tabBarShowLabel: false,
-          tabBarIcon: ({ focused }) => <Icon icon="community" size={30} color={focused && colors.tint} />,
-        }}
-      />
-
-      {/* <Tab.Screen
-        name="DemoCommunity"
-        component={DemoCommunityScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.communityTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="community" color={focused && colors.tint} />,
-        }}
-      /> */}
-
-      {/* <Tab.Screen
-        name="DemoPodcastList"
-        component={DemoPodcastListScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.podcastListTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="podcast" color={focused && colors.tint} />,
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="search" size={25} color={focused && colors.tint} />
+          ),
         }}
       />
 
       <Tab.Screen
-        name="DemoDebug"
-        component={DemoDebugScreen}
+        name="ProfileNav"
+        component={ProfileNavigator}
         options={{
-          tabBarLabel: translate("demoNavigator.debugTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="debug" color={focused && colors.tint} />,
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="profile" size={25} color={focused && colors.tint} />
+          ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   )
 }
