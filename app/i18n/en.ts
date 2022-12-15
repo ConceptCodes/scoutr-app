@@ -7,6 +7,7 @@ const en = {
     title: 'Scoutr',
     nextBtn: 'Next',
     change: 'Change',
+    continue: 'Coutinue'
   },
   welcomeScreen: {
     slogan: '2k park in real life',

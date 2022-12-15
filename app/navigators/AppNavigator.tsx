@@ -8,7 +8,7 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
-  NavigatorScreenParams, 
+  NavigatorScreenParams,
 } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackScreenProps } from "@react-navigation/stack"
@@ -16,13 +16,10 @@ import { observer } from "mobx-react-lite"
 import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
-import { useStores } from "../models" 
-import {
-  WelcomeScreen,
-  NotificationScreen,
-} from "../screens"
-import { RootNavigator, RootTabParamList } from "./RootNavigator" 
-import { AuthNavigator, AuthNavigatorParamList } from "./AuthNavigator" 
+import { useStores } from "../models"
+import { NotificationScreen } from "../screens"
+import { RootNavigator, RootTabParamList } from "./RootNavigator"
+import { AuthNavigator, AuthNavigatorParamList } from "./AuthNavigator"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 
 /**
@@ -39,9 +36,8 @@ import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined
-  Onboarding: NavigatorScreenParams<AuthNavigatorParamList> 
-  Root: NavigatorScreenParams<RootTabParamList> 
+  Onboarding: NavigatorScreenParams<AuthNavigatorParamList>
+  Root: NavigatorScreenParams<RootTabParamList>
   Modal: undefined
   Notification: undefined
   // 🔥 Your screens go here
@@ -69,11 +65,10 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={isAuthenticated ? "Root" : "Welcome"} 
+      initialRouteName={isAuthenticated ? "Root" : "Onboarding"}
     >
       {!isAuthenticated ? (
         <>
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="Onboarding" component={AuthNavigator} />
         </>
       ) : (
@@ -82,7 +77,11 @@ const AppStack = observer(function AppStack() {
         </>
       )}
       {/* <Stack.Screen name="Modal" component={ModalScreen} options={{ headerShown: false }} /> */}
-      <Stack.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="Notification"
+        component={NotificationScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   )
 })
