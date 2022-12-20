@@ -31,11 +31,9 @@ export const PreLoginScreen: FC<AuthStackScreenProps<"PreLogin">> = observer(
 
     useEffect(() => {
       const timer = setTimeout(() => {
-        if (index === content.length - 1) {
+        if (index === content.length - 1) 
           setIndex(0)
-        } else {
-          setIndex(index + 1)
-        }
+        else setIndex(index + 1)
       }, 5000)
       return () => clearTimeout(timer)
     }, [index])
