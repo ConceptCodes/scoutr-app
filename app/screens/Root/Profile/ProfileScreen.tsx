@@ -39,13 +39,13 @@ export const ProfileScreen: FC<RootTabScreenProps<"ProfileNav">> = observer(func
         LeftComponent={
           <View style={$row}>
             <Icon icon="away" size={40} color={colors.palette.primary600} />
-            <Text preset="heading" style={{ paddingLeft: 20 }} text="Away" size="lg" />
+            <Text preset="heading" style={{ paddingLeft: 10 }} text="Show me as away" size="md" />
           </View>
         }
         RightComponent={<Toggle value={isAway} variant="switch" onValueChange={setIsAway} />}
       />
       <Card
-        contentStyle={$card}
+        style={$card}
         verticalAlignment="center"
         LeftComponent={
           <View style={$row}>
@@ -96,6 +96,6 @@ const $card: ViewStyle = {
   ...$row,
   justifyContent: "space-between",
   marginVertical: spacing.medium,
-  width: "100%",
+  minWidth: "90%",
   height: 50,
 }

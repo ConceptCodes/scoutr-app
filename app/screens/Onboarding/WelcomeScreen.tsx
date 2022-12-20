@@ -14,7 +14,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   navigation,
 }) {
   function goNext() {
-    navigation.navigate("PreLogin")
+    navigation.navigate("AcceptTerms")
   }
 
   const $bottomContainerInsets = useSafeAreaInsetsStyle(["bottom"])

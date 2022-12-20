@@ -1,6 +1,6 @@
-
-export interface Response {
-  data: any;
+import { User } from "../../models/User";
+export interface Response<T = any> {
+  data: T;
   success: boolean;
   message: string;
   code: number;
@@ -52,6 +52,14 @@ export interface NotifcationsResponse extends Response {
     title: string
     body: string
   }[]
+}
+
+export interface GetProfileResponse extends Response {
+  data: User
+}
+
+export interface GetTermsAndConditionsResponse {
+  termsAndConditions: string
 }
 
 /**

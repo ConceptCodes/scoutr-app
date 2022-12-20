@@ -1,36 +1,40 @@
 const en = {
+  acceptTermsScreen: {
+    title: "Terms of Service",
+  },
   common: {
     ok: "OK!",
     cancel: "Cancel",
     back: "Back",
     logOut: "Log Out",
-    title: 'Scoutr',
-    nextBtn: 'Next',
-    change: 'Change',
-    continue: 'Coutinue',
-    success: 'Success',
+    title: "Scoutr",
+    nextBtn: "Next",
+    acceptBtn: "Accept",
+    change: "Change",
+    continue: "Coutinue",
+    success: "Success",
   },
   welcomeScreen: {
-    slogan: '2k park in real life',
-    button: 'Get Started Now',
+    slogan: "2k park in real life",
+    button: "Get Started Now",
   },
   preLoginScreen: {
-    button: 'Continue with Email',
+    button: "Continue with Email",
     connect: {
-      title: 'Connect',
-      description: 'with players with other players in your local area'
+      title: "Connect",
+      description: "with players with other players in your local area",
     },
     play: {
-      title: 'Play',
-      description: 'a variety of games outside. touch grass loser'
+      title: "Play",
+      description: "a variety of games outside. touch grass loser",
     },
     enjoy: {
-      title: 'Enjoy',
-      description: 'the outdoors and the company of others'
+      title: "Enjoy",
+      description: "the outdoors and the company of others",
     },
   },
   enterEmailScreen: {
-    title: 'Whats you Email Address',
+    title: "Whats you Email Address",
   },
   verifyOtpScreen: {
     title: "Verify OTP",
@@ -43,6 +47,13 @@ const en = {
     title: "Search",
     topScoutrs: "Top Scoutrs",
     filter: "Filter",
+  },
+  editProfileScreen: {
+    title: "Edit Profile",
+    logout: "Logout",
+    nameFieldPlaceholder: "Name",
+    emailFieldPlaceholder: "Email",
+    phoneFieldPlaceholder: "Phone",
   },
   errorScreen: {
     title: "Something went wrong!",

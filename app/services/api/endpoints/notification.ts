@@ -1,21 +1,19 @@
 import { ApiResponse, ApisauceInstance } from "apisauce"
-import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem";
-import { Response } from "./api.types";
+import { GeneralApiProblem, getGeneralApiProblem } from "../apiProblem";
+import { NotifcationsResponse } from "../api.types";
 
-export class AuthApi {
+export class NotificationApi {
   private _api: ApisauceInstance;
 
   constructor(api: ApisauceInstance) {
     this._api = api
   }
 
-  async sendOtp(phoneNumber: string): Promise<{ kind: "ok" } | GeneralApiProblem> {
+  async getAll(phoneNumber: string): Promise<{ kind: "ok" } | GeneralApiProblem> {
     // make the api call
-    const response: ApiResponse<any> = await this._api.post(
-      `auth/otp`,
-      {
-        phoneNumber
-      },
+    const response: ApiResponse<any> = await this._api.get(
+      `/notification/otp`, 
+      { phoneNumber }
     )
 
     // the typical ways to die when calling an api
@@ -26,7 +24,7 @@ export class AuthApi {
 
     // transform the data into the format we are expecting
     try {
-      const rawData: Response = response.data
+      const rawData: NotifcationsResponse = response.data
       if (rawData.success) return { kind: "ok" }
     } catch (e) {
       if (__DEV__) {

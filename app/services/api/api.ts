@@ -8,7 +8,10 @@
 import { ApisauceInstance, create } from "apisauce"
 import Config from "../../config"
 import type { ApiConfig } from "./api.types"
-import { AuthApi } from "./auth"
+import { AuthApi } from "./endpoints/auth"
+import { ProfileApi } from "./endpoints/profile"
+import { NotificationApi } from "./endpoints/notification"
+import { MetadataApi } from "./endpoints/metadata"
 
 /**
  * Configuring the apisauce instance.
@@ -26,6 +29,9 @@ export class Api {
   apisauce: ApisauceInstance
   config: ApiConfig
   auth: AuthApi
+  profile: ProfileApi
+  notification: NotificationApi
+  metadata: MetadataApi
 
   /**
    * Set up our API instance. Keep this lightweight!
@@ -40,9 +46,10 @@ export class Api {
       },
     })
     this.auth = new AuthApi(this.apisauce)
+    this.profile = new ProfileApi(this.apisauce)
+    this.notification = new NotificationApi(this.apisauce)
+    this.metadata = new MetadataApi(this.apisauce)
   }
-
-
 }
 
 // Singleton instance of the API for convenience

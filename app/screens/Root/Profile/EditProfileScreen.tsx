@@ -1,31 +1,57 @@
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle } from "react-native"
-import { StackScreenProps } from "@react-navigation/stack"
-import { AppStackScreenProps } from "../../../navigators"
-import { Screen, Text } from "../../../components"
-// import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "../models"
+import { ProfileStackScreenProps } from "../../../navigators"
+import { Screen, TextField, Button } from "../../../components"
+import { useStores, User } from "../../../models"
+import { useHeader } from "../../../utils/useHeader"
+import Avatar from "./Avatar"
+import { colors } from "../../../theme"
 
-// STOP! READ ME FIRST!
-// To fix the TS error below, you'll need to add the following things in your navigation config:
-// - Add `EditProfile: undefined` to AppStackParamList
-// - Import your screen, and add it to the stack:
-//     `<Stack.Screen name="EditProfile" component={EditProfileScreen} />`
-// Hint: Look for the 🔥!
+export const EditProfileScreen: FC<ProfileStackScreenProps<"EditProfile">> = observer(
+  function EditProfileScreen({ navigation }) {
+    const { user: userStore, authenticationStore: { logout } } = useStores()
 
-// REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
-// @ts-ignore
-export const EditProfileScreen: FC<StackScreenProps<AppStackScreenProps, "EditProfile">> = observer(
-  function EditProfileScreen() {
-    // Pull in one of our MST stores
-    // const { someStore, anotherStore } = useStores()
+    const [user, setUser] = useState<User>(userStore)
 
-    // Pull in navigation via hook
-    // const navigation = useNavigation()
+    useHeader({
+      leftIcon: "caretLeft",
+      containerStyle: { backgroundColor: colors.palette.neutral300 },
+      backgroundColor: colors.transparent,
+      onLeftPress: () => navigation.goBack(),
+      titleTx: "editProfileScreen.title",
+      titleStyle: { left: 0 },
+    })
+
     return (
       <Screen style={$root} preset="scroll">
-        <Text text="editProfile" />
+        <Avatar displayName={user?.displayName} avatar={user?.avatar} />
+        <TextField
+          containerStyle={$inputContainer}
+          inputWrapperStyle={$input}
+          labelTx="editProfileScreen.nameFieldPlaceholder"
+          value={user?.displayName}
+          onChangeText={(displayName) => setUser({ ...user, displayName })}
+        />
+        <TextField
+          containerStyle={$inputContainer}
+          inputWrapperStyle={$input}
+          labelTx="editProfileScreen.emailFieldPlaceholder"
+          value={user?.email}
+          onChangeText={(email) => setUser({ ...user, email })}
+        />
+        <Button
+          tx="common.save"
+          preset="rounded"
+          style={$btn}
+          onPress={() => userStore.updateProfile(user)}
+        />
+        <Button
+          tx="editProfileScreen.logout"
+          preset="rounded"
+          style={$btn}
+          onPress={logout}
+        />
       </Screen>
     )
   },
@@ -33,4 +59,21 @@ export const EditProfileScreen: FC<StackScreenProps<AppStackScreenProps, "EditPr
 
 const $root: ViewStyle = {
   flex: 1,
+  padding: 16,
+}
+
+const $inputContainer: ViewStyle = {
+  marginBottom: 24,
+  borderBottomColor: colors.palette.black,
+  borderBottomWidth: 3,
+}
+
+const $input: ViewStyle = {
+  backgroundColor: colors.transparent,
+  borderColor: colors.transparent,
+}
+
+const $btn: ViewStyle = {
+  marginTop: 24,
+  backgroundColor: colors.palette.black,
 }

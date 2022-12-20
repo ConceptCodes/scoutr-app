@@ -1,10 +1,17 @@
 import React from "react"
 import { createStackNavigator, StackScreenProps } from "@react-navigation/stack"
-import { EnterEmailScreen, PreLoginScreen, WelcomeScreen, LoginScreen } from "../screens"
+import {
+  EnterEmailScreen,
+  PreLoginScreen,
+  WelcomeScreen,
+  LoginScreen,
+  AcceptTermsScreen,
+} from "../screens"
 import { RegisterNavigator, RegisterNavigatorParamList } from "./RegisterNavigator"
 
 export type AuthNavigatorParamList = {
   Welcome: undefined
+  AcceptTerms: undefined
   PreLogin: undefined
   EnterEmail: undefined
   Login: undefined
@@ -25,6 +32,7 @@ export const AuthNavigator = () => {
       initialRouteName="Welcome"
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen name="AcceptTerms" component={AcceptTermsScreen} />
       <Stack.Screen name="PreLogin" component={PreLoginScreen} />
       <Stack.Screen name="EnterEmail" component={EnterEmailScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
